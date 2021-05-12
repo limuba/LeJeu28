@@ -1647,7 +1647,7 @@ GameObject:
   - component: {fileID: 1225668959512881971}
   - component: {fileID: 7046483414343374817}
   m_Layer: 31
-  m_Name: New Palette
+  m_Name: Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1680,7 +1680,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &228655908798656302
+--- !u!114 &6115532603838406268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
