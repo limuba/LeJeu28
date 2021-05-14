@@ -8,7 +8,7 @@ public class LoadSceneJeu : MonoBehaviour
 {
     public void LoadJeu()
     {
-        SceneManager.LoadScene("LeNiveau");
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void QuitMenu()
