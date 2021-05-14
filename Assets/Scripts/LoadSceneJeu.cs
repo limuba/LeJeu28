@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneJeu : MonoBehaviour
 {
-    public void LoadJeu ()
+    public void LoadJeu()
     {
         SceneManager.LoadScene("LeNiveau");
+    }
+
+    public void QuitMenu()
+    {
+        Application.Quit();
+        Debug.Log("quit");
     }
 }
