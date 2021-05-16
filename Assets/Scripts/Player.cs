@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rigidbody2D;
 
+    private SpriteRenderer spriteRenderer;
+
+    private Animator animator;
 
     private bool canJump = false;
 
@@ -33,11 +36,12 @@ public class Player : MonoBehaviour
     {
         direction = 0;
     }
+
     private void MoveLROnperformed(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<float>();
 
-        
+        spriteRenderer.flipX = direction < 0;
     }
 
     private void JumpOnperformed(InputAction.CallbackContext obj)
@@ -53,8 +57,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -74,9 +78,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var Speed = Mathf.Abs(rigidbody2D.velocity.x);
         if (Math.Abs(rigidbody2D.velocity.x) < maxSpeed)
         {
             rigidbody2D.AddForce(new Vector2(speed * direction, 0));
+            animator.SetFloat("Speed", Speed);
         }
     }
 
