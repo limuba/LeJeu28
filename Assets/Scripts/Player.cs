@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     private void MoveLROncanceled(InputAction.CallbackContext obj)
     {
         direction = 0;
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //utilisation du constrain
     }
 
     private void MoveLROnperformed(InputAction.CallbackContext obj)
@@ -42,6 +45,9 @@ public class Player : MonoBehaviour
         direction = obj.ReadValue<float>();
 
         spriteRenderer.flipX = direction < 0;
+        rigidbody2D.constraints = RigidbodyConstraints2D.None;
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //utilisation du constrain
     }
 
     private void JumpOnperformed(InputAction.CallbackContext obj)
@@ -64,6 +70,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         var hit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 0.001f);
 
         if (hit.collider != null)
@@ -73,17 +80,24 @@ public class Player : MonoBehaviour
         else
         {
             canJump = false;
-        }  
+        }
+
     }
 
     private void FixedUpdate()
     {
+        
         var Speed = Mathf.Abs(rigidbody2D.velocity.x);
+        
         if (Math.Abs(rigidbody2D.velocity.x) < maxSpeed)
         {
             rigidbody2D.AddForce(new Vector2(speed * direction, 0));
+
             animator.SetFloat("Speed", Speed);
         }
+      
+        
     }
 
 }
+

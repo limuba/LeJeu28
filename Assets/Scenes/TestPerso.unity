@@ -133,10 +133,10 @@ GameObject:
   m_Component:
   - component: {fileID: 782494860}
   - component: {fileID: 782494859}
-  - component: {fileID: 782494858}
   - component: {fileID: 782494857}
   - component: {fileID: 782494861}
   - component: {fileID: 782494862}
+  - component: {fileID: 782494858}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  maxSpeed: 15
-  jumpForce: 7
+  maxSpeed: 17
+  jumpForce: 10
 --- !u!1 &1796652732
 GameObject:
   m_ObjectHideFlags: 0
