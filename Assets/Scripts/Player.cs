@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private Controls controls;
 
     private Rigidbody2D rigidbody2D;
+    //private rigidbody2D.constraints = RigidbodyConstraints2D
 
     private SpriteRenderer spriteRenderer;
 
@@ -35,8 +36,8 @@ public class Player : MonoBehaviour
     private void MoveLROncanceled(InputAction.CallbackContext obj)
     {
         direction = 0;
-        rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
-        rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX; // rigidbody2D.constraints.freezePositionX = true
+        //rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //utilisation du constrain
     }
 
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
         direction = obj.ReadValue<float>();
 
         spriteRenderer.flipX = direction < 0;
-        rigidbody2D.constraints = RigidbodyConstraints2D.None;
+        rigidbody2D.constraints = RigidbodyConstraints2D.None;  
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //utilisation du constrain
     }
