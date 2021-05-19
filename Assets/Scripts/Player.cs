@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     {
         direction = 0;
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX; // rigidbody2D.constraints.freezePositionX = true
-        //rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //utilisation du constrain
     }
 
@@ -89,16 +89,16 @@ public class Player : MonoBehaviour
     {
         
         var Speed = Mathf.Abs(rigidbody2D.velocity.x);
+        var VerticalSpeed = Mathf.Abs(rigidbody2D.velocity.y);
         
-        if (Math.Abs(rigidbody2D.velocity.x) < maxSpeed)
+        if (Speed < maxSpeed)
         {
-            rigidbody2D.AddForce(new Vector2(speed * direction, 0));
-
-            animator.SetFloat("Speed", Speed);
+            rigidbody2D.AddForce(new Vector2(speed * direction, 0)); 
         }
-      
-        
+        animator.SetFloat("Speed", Speed);
+        animator.SetBool("IsJumping", !canJump);
     }
+ 
 
 }
 
