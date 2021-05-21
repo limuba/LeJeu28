@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private Transform Spawnpoint;
 
     private float direction;
    
@@ -22,7 +23,6 @@ public class Player : MonoBehaviour
     private Animator animator;
 
     private bool canJump = false;
-    
 
     private void OnEnable()
     {
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
     private void TpPerformed(InputAction.CallbackContext obj)
     {
-        transform.position +=  new Vector3 (5, 0, 0);
+        transform.position += new Vector3(5, 0, 0);
         //tansform.position x+5
         
     }
@@ -108,7 +108,12 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", Speed);
         animator.SetBool("IsJumping", !canJump);
     }
- 
+    private void OnTriggerEnter2D(Collider2D colliderTriggered)
+    {
+
+        rigidbody2D.transform.position = Spawnpoint.position;
+        
+    }
 
 }
 
