@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpForce;
 
     private float direction;
-
+   
     private Controls controls;
 
     private Rigidbody2D rigidbody2D;
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private Animator animator;
 
     private bool canJump = false;
+    
 
     private void OnEnable()
     {
@@ -30,9 +31,18 @@ public class Player : MonoBehaviour
         controls.MoveJump.Jump.performed += JumpOnperformed;
         controls.MoveJump.MoveLR.performed += MoveLROnperformed;
         controls.MoveJump.MoveLR.canceled += MoveLROncanceled;
+        controls.MoveJump.TP.performed += TpPerformed;
 
     }
 
+    private void TpPerformed(InputAction.CallbackContext obj)
+    {
+        transform.position +=  new Vector3 (5, 0, 0);
+        //tansform.position x+5
+        
+    }
+
+    
     private void MoveLROncanceled(InputAction.CallbackContext obj)
     {
         direction = 0;
@@ -76,11 +86,11 @@ public class Player : MonoBehaviour
 
         if (hit.collider != null)
         {
-            canJump = true;
+            canJump = true;            
         }
         else
         {
-            canJump = false;
+            canJump = false;          
         }
 
     }
@@ -89,7 +99,7 @@ public class Player : MonoBehaviour
     {
         
         var Speed = Mathf.Abs(rigidbody2D.velocity.x);
-        var VerticalSpeed = Mathf.Abs(rigidbody2D.velocity.y);
+        //var VerticalSpeed = Mathf.Abs(rigidbody2D.velocity.y);
         
         if (Speed < maxSpeed)
         {
