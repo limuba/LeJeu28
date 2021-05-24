@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform Spawnpoint;
+    //[SerializeField] private float Teleport;
 
     private float direction;
-   
+    //private float teleportdirection;
+
     private Controls controls;
 
     private Rigidbody2D rigidbody2D;
@@ -31,21 +33,36 @@ public class Player : MonoBehaviour
         controls.MoveJump.Jump.performed += JumpOnperformed;
         controls.MoveJump.MoveLR.performed += MoveLROnperformed;
         controls.MoveJump.MoveLR.canceled += MoveLROncanceled;
-        controls.MoveJump.TP.performed += TpPerformed;
-
+        //controls.MoveJump.TP.performed += TpPerformed;
+        controls.MoveJump.TeleportRight.performed += TeleportRightPerformed;
+        controls.MoveJump.TeleportLeft.performed += TeleportLeftPerformed;
     }
 
-    private void TpPerformed(InputAction.CallbackContext obj)
+    private void TeleportRightPerformed (InputAction.CallbackContext obj)
     {
         transform.position += new Vector3(5, 0, 0);
-        //tansform.position x+5
+    }
+
+   
+    private void TeleportLeftPerformed (InputAction.CallbackContext obj)
+    {
+        transform.position += new Vector3(-5, 0, 0);
         
     }
 
-    
+    /*
+   private void TpPerformed(InputAction.CallbackContext obj)
+   {
+       transform.position += new Vector3(5, 0, 0) * direction;
+       //tansform.position x+5
+       teleportdirection = obj.ReadValue<float>();
+   }
+   */
+
     private void MoveLROncanceled(InputAction.CallbackContext obj)
     {
         direction = 0;
+
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX; // rigidbody2D.constraints.freezePositionX = true
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //utilisation du constrain
@@ -56,6 +73,7 @@ public class Player : MonoBehaviour
         direction = obj.ReadValue<float>();
 
         spriteRenderer.flipX = direction < 0;
+
         rigidbody2D.constraints = RigidbodyConstraints2D.None;  
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //utilisation du constrain
