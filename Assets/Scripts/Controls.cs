@@ -35,9 +35,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""TP"",
+                    ""name"": ""TeleportRight"",
                     ""type"": ""Button"",
-                    ""id"": ""a3d6df5e-da1d-444f-8b18-bf74be686515"",
+                    ""id"": ""990d2a7f-ea26-4587-83a3-a06db43a969c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TeleportLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""0611eb9b-7411-4e78-8f51-c2ddc6ac7ee6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -89,37 +97,26 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""5900cf25-5ff9-4c51-90ea-f7acb4dfc9ef"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TP"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""4c780d8c-6ab0-42a9-9e5a-842369d67edf"",
+                    ""name"": """",
+                    ""id"": ""71af2edd-1d7f-437f-9b9d-775055961a9d"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TP"",
+                    ""action"": ""TeleportRight"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""c5a90920-4c26-4acf-a6e1-3110c0e72d63"",
+                    ""name"": """",
+                    ""id"": ""0d455fdd-5d4b-4df2-a39f-145b5548d6ec"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TP"",
+                    ""action"": ""TeleportLeft"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -130,7 +127,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_MoveJump = asset.FindActionMap("MoveJump", throwIfNotFound: true);
         m_MoveJump_Jump = m_MoveJump.FindAction("Jump", throwIfNotFound: true);
         m_MoveJump_MoveLR = m_MoveJump.FindAction("MoveLR", throwIfNotFound: true);
-        m_MoveJump_TP = m_MoveJump.FindAction("TP", throwIfNotFound: true);
+        m_MoveJump_TeleportRight = m_MoveJump.FindAction("TeleportRight", throwIfNotFound: true);
+        m_MoveJump_TeleportLeft = m_MoveJump.FindAction("TeleportLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -182,14 +180,16 @@ public class @Controls : IInputActionCollection, IDisposable
     private IMoveJumpActions m_MoveJumpActionsCallbackInterface;
     private readonly InputAction m_MoveJump_Jump;
     private readonly InputAction m_MoveJump_MoveLR;
-    private readonly InputAction m_MoveJump_TP;
+    private readonly InputAction m_MoveJump_TeleportRight;
+    private readonly InputAction m_MoveJump_TeleportLeft;
     public struct MoveJumpActions
     {
         private @Controls m_Wrapper;
         public MoveJumpActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_MoveJump_Jump;
         public InputAction @MoveLR => m_Wrapper.m_MoveJump_MoveLR;
-        public InputAction @TP => m_Wrapper.m_MoveJump_TP;
+        public InputAction @TeleportRight => m_Wrapper.m_MoveJump_TeleportRight;
+        public InputAction @TeleportLeft => m_Wrapper.m_MoveJump_TeleportLeft;
         public InputActionMap Get() { return m_Wrapper.m_MoveJump; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -205,9 +205,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveLR.started -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnMoveLR;
                 @MoveLR.performed -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnMoveLR;
                 @MoveLR.canceled -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnMoveLR;
-                @TP.started -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTP;
-                @TP.performed -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTP;
-                @TP.canceled -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTP;
+                @TeleportRight.started -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTeleportRight;
+                @TeleportRight.performed -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTeleportRight;
+                @TeleportRight.canceled -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTeleportRight;
+                @TeleportLeft.started -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTeleportLeft;
+                @TeleportLeft.performed -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTeleportLeft;
+                @TeleportLeft.canceled -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTeleportLeft;
             }
             m_Wrapper.m_MoveJumpActionsCallbackInterface = instance;
             if (instance != null)
@@ -218,9 +221,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveLR.started += instance.OnMoveLR;
                 @MoveLR.performed += instance.OnMoveLR;
                 @MoveLR.canceled += instance.OnMoveLR;
-                @TP.started += instance.OnTP;
-                @TP.performed += instance.OnTP;
-                @TP.canceled += instance.OnTP;
+                @TeleportRight.started += instance.OnTeleportRight;
+                @TeleportRight.performed += instance.OnTeleportRight;
+                @TeleportRight.canceled += instance.OnTeleportRight;
+                @TeleportLeft.started += instance.OnTeleportLeft;
+                @TeleportLeft.performed += instance.OnTeleportLeft;
+                @TeleportLeft.canceled += instance.OnTeleportLeft;
             }
         }
     }
@@ -229,6 +235,7 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMoveLR(InputAction.CallbackContext context);
-        void OnTP(InputAction.CallbackContext context);
+        void OnTeleportRight(InputAction.CallbackContext context);
+        void OnTeleportLeft(InputAction.CallbackContext context);
     }
 }

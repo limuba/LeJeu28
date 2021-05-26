@@ -22,9 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TP",
+                    "name": "TeleportRight",
                     "type": "Button",
-                    "id": "a3d6df5e-da1d-444f-8b18-bf74be686515",
+                    "id": "990d2a7f-ea26-4587-83a3-a06db43a969c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TeleportLeft",
+                    "type": "Button",
+                    "id": "0611eb9b-7411-4e78-8f51-c2ddc6ac7ee6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -76,37 +84,26 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "5900cf25-5ff9-4c51-90ea-f7acb4dfc9ef",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TP",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "positive",
-                    "id": "4c780d8c-6ab0-42a9-9e5a-842369d67edf",
+                    "name": "",
+                    "id": "71af2edd-1d7f-437f-9b9d-775055961a9d",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TP",
+                    "action": "TeleportRight",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "c5a90920-4c26-4acf-a6e1-3110c0e72d63",
+                    "name": "",
+                    "id": "0d455fdd-5d4b-4df2-a39f-145b5548d6ec",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TP",
+                    "action": "TeleportLeft",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 }
             ]
         }
