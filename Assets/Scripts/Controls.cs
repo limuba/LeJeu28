@@ -33,6 +33,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TP"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3d6df5e-da1d-444f-8b18-bf74be686515"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -79,6 +87,39 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""MoveLR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5900cf25-5ff9-4c51-90ea-f7acb4dfc9ef"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TP"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4c780d8c-6ab0-42a9-9e5a-842369d67edf"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c5a90920-4c26-4acf-a6e1-3110c0e72d63"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -89,6 +130,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_MoveJump = asset.FindActionMap("MoveJump", throwIfNotFound: true);
         m_MoveJump_Jump = m_MoveJump.FindAction("Jump", throwIfNotFound: true);
         m_MoveJump_MoveLR = m_MoveJump.FindAction("MoveLR", throwIfNotFound: true);
+        m_MoveJump_TP = m_MoveJump.FindAction("TP", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -140,12 +182,14 @@ public class @Controls : IInputActionCollection, IDisposable
     private IMoveJumpActions m_MoveJumpActionsCallbackInterface;
     private readonly InputAction m_MoveJump_Jump;
     private readonly InputAction m_MoveJump_MoveLR;
+    private readonly InputAction m_MoveJump_TP;
     public struct MoveJumpActions
     {
         private @Controls m_Wrapper;
         public MoveJumpActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_MoveJump_Jump;
         public InputAction @MoveLR => m_Wrapper.m_MoveJump_MoveLR;
+        public InputAction @TP => m_Wrapper.m_MoveJump_TP;
         public InputActionMap Get() { return m_Wrapper.m_MoveJump; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -161,6 +205,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveLR.started -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnMoveLR;
                 @MoveLR.performed -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnMoveLR;
                 @MoveLR.canceled -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnMoveLR;
+                @TP.started -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTP;
+                @TP.performed -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTP;
+                @TP.canceled -= m_Wrapper.m_MoveJumpActionsCallbackInterface.OnTP;
             }
             m_Wrapper.m_MoveJumpActionsCallbackInterface = instance;
             if (instance != null)
@@ -171,6 +218,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveLR.started += instance.OnMoveLR;
                 @MoveLR.performed += instance.OnMoveLR;
                 @MoveLR.canceled += instance.OnMoveLR;
+                @TP.started += instance.OnTP;
+                @TP.performed += instance.OnTP;
+                @TP.canceled += instance.OnTP;
             }
         }
     }
@@ -179,5 +229,6 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMoveLR(InputAction.CallbackContext context);
+        void OnTP(InputAction.CallbackContext context);
     }
 }
