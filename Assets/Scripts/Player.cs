@@ -10,16 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform Spawnpoint;
-    //[SerializeField] private float Teleport;
+
 
     private float direction;
-    //private float teleportdirection;
 
     private Controls controls;
 
     private Rigidbody2D rigidbody2D;
-    //private rigidbody2D.constraints = RigidbodyConstraints2D
-
+   
     private SpriteRenderer spriteRenderer;
 
     private Animator animator;
@@ -33,7 +31,7 @@ public class Player : MonoBehaviour
         controls.MoveJump.Jump.performed += JumpOnperformed;
         controls.MoveJump.MoveLR.performed += MoveLROnperformed;
         controls.MoveJump.MoveLR.canceled += MoveLROncanceled;
-        //controls.MoveJump.TP.performed += TpPerformed;
+        //Keys for trigger the teleportation
         controls.MoveJump.TeleportRight.performed += TeleportRightPerformed;
         controls.MoveJump.TeleportLeft.performed += TeleportLeftPerformed;
     }
@@ -42,28 +40,17 @@ public class Player : MonoBehaviour
     {
         transform.position += new Vector3(5, 0, 0);
     }
-
-   
     private void TeleportLeftPerformed (InputAction.CallbackContext obj)
     {
         transform.position += new Vector3(-5, 0, 0);
         
     }
-
-    /*
-   private void TpPerformed(InputAction.CallbackContext obj)
-   {
-       transform.position += new Vector3(5, 0, 0) * direction;
-       //tansform.position x+5
-       teleportdirection = obj.ReadValue<float>();
-   }
-   */
-
+       //variable determinant la distance de la teleportation
     private void MoveLROncanceled(InputAction.CallbackContext obj)
     {
         direction = 0;
 
-        rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX; // rigidbody2D.constraints.freezePositionX = true
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX; 
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //utilisation du constrain
     }
@@ -130,7 +117,7 @@ public class Player : MonoBehaviour
     {
 
         rigidbody2D.transform.position = Spawnpoint.position;
-        
+        //IsTrigger qui permet de ne pas se teleporter dans les murs 
     }
 
 }
