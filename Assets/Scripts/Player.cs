@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        /*
         controls = new Controls();
         controls.Enable();
         controls.MoveJump.Jump.performed += JumpOnperformed;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         //Keys for trigger the teleportation
         controls.MoveJump.TeleportRight.performed += TeleportRightPerformed;
         controls.MoveJump.TeleportLeft.performed += TeleportLeftPerformed;
+        */
     }
 
     private void TeleportRightPerformed (InputAction.CallbackContext obj)
