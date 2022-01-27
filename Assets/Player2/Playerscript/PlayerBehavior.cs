@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    private Jump jump;
     private Move move;
     private float direction;
     private new Rigidbody2D rigidbody2D;
 
     private void Awake()
     {
+        jump = GetComponent<Jump>();
         move = GetComponent<Move>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -23,6 +25,14 @@ public class PlayerBehavior : MonoBehaviour
         //animations.UpdateFacingDirection(value);
         //lastFacingDirection = value;
     }
+    public void OnJump(InputAction.CallbackContext obj)
+    {
+        Debug.Log("touch");
+        if (!obj.performed) return;
+        jump.Jumper();
+
+    }
+
     private void Update()
     {
         //animations.SetSpeed(rigidbody2D.velocity.sqrMagnitude);
