@@ -13,10 +13,10 @@ public class Move : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    
     public void Moving(float direction)
     {
         if (rigidbody2D.velocity.sqrMagnitude < maxSpeed)
             rigidbody2D.AddForce (new Vector2(direction * acceleration,0));
     }
-
 }

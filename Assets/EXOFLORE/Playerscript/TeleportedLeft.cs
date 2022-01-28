@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class TeleportedRight : Teleport
+public class TeleportedLeft : TeleportL
 {
     public float teleportLenght;
 
-    public override void SetTransorm()
+    public override void SetTransformL()
     {
         transform.position += new Vector3(teleportLenght, 0, 0);
+
     }
-    
 }

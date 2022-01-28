@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,17 +5,22 @@ public class PlayerBehavior : MonoBehaviour
 {
     private Jump jump;
     private Move move;
-    private Teleport teleport;
+    private TeleportR teleportr;
+    private TeleportL teleportl;
 
     private float direction;
-    private new Rigidbody2D rigidbody2D;
-    //private Vector2 lastFancingDirection
+    private Rigidbody2D rigidbody2D;
+    //private Vector2 lastFancingDirection;
+
+
+
     private void Awake()
     {
         
         jump = GetComponent<Jump>();
         move = GetComponent<Move>();
-        teleport = GetComponent<Teleport>();
+        teleportr = GetComponent<TeleportR>();
+        teleportl = GetComponent<TeleportL>();
 
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -25,33 +28,38 @@ public class PlayerBehavior : MonoBehaviour
     
     public void TeleportRight(InputAction.CallbackContext obj)
     {
-        teleport.SetTransorm();
+        if (!obj.performed) return;
+        teleportr.SetTransformR();
     }
+
+    
     public void TeleportLeft(InputAction.CallbackContext obj)
     {
-        teleport.SetTransorm();
+        if (!obj.performed) return;
+        teleportl.SetTransformL();
     }
+    
+
     public void OnMove(InputAction.CallbackContext obj)
     {
         var value = obj.ReadValue<float>();
         direction = value;
         if (!obj.performed) return;
-
-        //animations.UpdateFacingDirection(value);
-        //lastFacingDirection = value;
+        //lastFancingDirection = value;
     }
+
     public void OnJump(InputAction.CallbackContext obj)
     {
         //Debug.Log("touch");
-        if (!obj.performed) return;
         jump.Jumper();
+        if (!obj.performed) return;
+        
 
     }
 
     private void Update()
     {
         //animations.SetSpeed(rigidbody2D.velocity.sqrMagnitude);
-        //playerSpeed.DisplaySpeed(rigidbody2D.velocity.magnitude);
     }
 
     private void FixedUpdate()
@@ -60,8 +68,4 @@ public class PlayerBehavior : MonoBehaviour
 
     }
 
-    public void OnDamaged()
-    {
-        //ded
-    }
 }

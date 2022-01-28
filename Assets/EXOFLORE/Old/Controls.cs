@@ -36,15 +36,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""TeleportRight"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""5b089393-5dae-4fbe-b516-4a6baee5b1cd"",
-                    ""expectedControlType"": ""Key"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""TeleportLeft"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""6493e771-0bf4-4360-87d4-36e7ffed26c3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
