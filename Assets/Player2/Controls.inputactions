@@ -20,6 +20,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TeleportRight",
+                    "type": "PassThrough",
+                    "id": "5b089393-5dae-4fbe-b516-4a6baee5b1cd",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TeleportLeft",
+                    "type": "PassThrough",
+                    "id": "6493e771-0bf4-4360-87d4-36e7ffed26c3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -64,6 +80,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4602c10-c006-472c-8171-12384e879e90",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TeleportRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c1b118a-84f5-4d9d-b2e3-d67b15ef3479",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TeleportLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

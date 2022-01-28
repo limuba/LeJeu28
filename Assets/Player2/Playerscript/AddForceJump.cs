@@ -12,7 +12,6 @@ public class AddForceJump : Jump
         {
             rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             canJump = false;
-            Debug.Log("try");
         }
     }
     

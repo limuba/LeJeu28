@@ -33,6 +33,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TeleportRight"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5b089393-5dae-4fbe-b516-4a6baee5b1cd"",
+                    ""expectedControlType"": ""Key"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TeleportLeft"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6493e771-0bf4-4360-87d4-36e7ffed26c3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -79,6 +95,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4602c10-c006-472c-8171-12384e879e90"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c1b118a-84f5-4d9d-b2e3-d67b15ef3479"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -89,6 +127,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Newaction = m_Player.FindAction("New action", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_TeleportRight = m_Player.FindAction("TeleportRight", throwIfNotFound: true);
+        m_Player_TeleportLeft = m_Player.FindAction("TeleportLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -140,12 +180,16 @@ public class @Controls : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Newaction;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_TeleportRight;
+    private readonly InputAction m_Player_TeleportLeft;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Newaction => m_Wrapper.m_Player_Newaction;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @TeleportRight => m_Wrapper.m_Player_TeleportRight;
+        public InputAction @TeleportLeft => m_Wrapper.m_Player_TeleportLeft;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -161,6 +205,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @TeleportRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTeleportRight;
+                @TeleportRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTeleportRight;
+                @TeleportRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTeleportRight;
+                @TeleportLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTeleportLeft;
+                @TeleportLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTeleportLeft;
+                @TeleportLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTeleportLeft;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -171,6 +221,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @TeleportRight.started += instance.OnTeleportRight;
+                @TeleportRight.performed += instance.OnTeleportRight;
+                @TeleportRight.canceled += instance.OnTeleportRight;
+                @TeleportLeft.started += instance.OnTeleportLeft;
+                @TeleportLeft.performed += instance.OnTeleportLeft;
+                @TeleportLeft.canceled += instance.OnTeleportLeft;
             }
         }
     }
@@ -179,5 +235,7 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnNewaction(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnTeleportRight(InputAction.CallbackContext context);
+        void OnTeleportLeft(InputAction.CallbackContext context);
     }
 }
